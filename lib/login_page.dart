@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -14,9 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> _login() async {
+  Future<void> _login(BuildContext context) async {
     final response = await http.post(
-      Uri.parse('http://192.168.75.206:8012/Flutter/Login.php'),
+      Uri.parse('https://er-apps.alwaysdata.net/Flutter/Login.php'),
       body: {
         'username_email': usernameController.text,
         'password': passwordController.text,
@@ -39,8 +41,7 @@ class _LoginPageState extends State<LoginPage> {
         // Login failed
         showDialog(
           context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
+          builder: (BuildContext context) => AlertDialog(
               title: const Text('Login Failed'),
               content: Text(data['error_message'] ?? 'Unknown error'),
               actions: [
@@ -51,8 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('OK'),
                 ),
               ],
-            );
-          },
+            ),
         );
       }
     } else {
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
               ),
             ),
@@ -82,13 +82,13 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
             ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () => _login(context),
               child: const Text('Login'),
             ),
           ],
