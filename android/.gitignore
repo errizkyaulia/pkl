@@ -20,4 +20,4 @@ key.properties
 **/*.jks
 
 # Custom entries (if you have other sensitive files)
-lib/config.dart
+/lib/config.dart
