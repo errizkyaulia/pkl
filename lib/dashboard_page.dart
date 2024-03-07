@@ -9,8 +9,8 @@ class DashboardPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
-      body: Center(
-        child: const Text('Welcome to the Dashboard!'),
+      body: const Center(
+        child: Text('Welcome to the Dashboard!'),
       ),
     );
   }
